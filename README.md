@@ -1,7 +1,6 @@
 line-bot-sdk-python
 ===================
 
-|Build Status| |PyPI version| |Documentation Status|
 
 SDK of the LINE Messaging API for Python.
 
