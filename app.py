@@ -108,4 +108,9 @@ if __name__ == '__main__':
                             )
     options = arg_parser.parse_args()
 
+    rc = 0
+    while rc == 0:
+        rc = mqttc.loop()
+    print("rc: " + str(rc))
+
     app.run(debug=options.debug, port=options.port)
