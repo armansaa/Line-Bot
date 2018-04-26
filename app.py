@@ -27,7 +27,8 @@ from linebot.exceptions import InvalidSignatureError
 
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-global client
+client = mqtt.Client()
+
 global options
 
 app = Flask(__name__)
@@ -120,8 +121,6 @@ if __name__ == '__main__':
     arg_parser.add_argument('-d', '--debug', default=False, help='debug'
                             )
     options = arg_parser.parse_args()
-
-    global client = mqtt.Client()
 
     client.on_connect = on_connect
     client.on_message = on_message
