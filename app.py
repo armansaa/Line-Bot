@@ -126,11 +126,11 @@ if __name__ == '__main__':
     client.on_message = on_message
     client.on_publish = on_publish
     client.on_subscribe = on_subscribe
-    client.username_pw_set('bbff39d0d3066758ffe55666762b3c8b150295b848cb6c871b79f2fff36c79fb'
+    client.username_pw_set('vzrkhrjc'
                            ,
-                           '50acea3098359517297e08040dc6bfc371d044190be6527c1ac29e078cbe8313'
+                           'yycvU9313Rti'
                            )
 
-    client.connect('147.75.93.178', 1883, 60)
+    client.connect('m10.cloudmqtt.com', 10676, 60)
 
     client.loop_forever()
