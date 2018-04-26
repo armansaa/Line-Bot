@@ -121,7 +121,7 @@ if __name__ == '__main__':
                             )
     options = arg_parser.parse_args()
 
-    client = mqtt.Client()
+    global client = mqtt.Client()
 
     client.on_connect = on_connect
     client.on_message = on_message
