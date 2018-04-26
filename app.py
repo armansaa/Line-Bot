@@ -54,10 +54,6 @@ mqttc.on_log = on_log
 mqttc.username_pw_set("vzrkhrjc", "yycvU9313Rti")
 mqttc.connect('m10.cloudmqtt.com', 10676, 60)
 
-mqttc.subscribe("hello/world", 0)
-
-mqttc.publish("hello/world", "my message")
-
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
@@ -100,7 +96,7 @@ def callback():
 
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=event.message.text))
-        client.publish('TA', event.message.text)
+        mqttc.publish('TA', event.message.text)
     return 'OK'
 
 if __name__ == '__main__':
