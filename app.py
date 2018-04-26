@@ -54,6 +54,8 @@ mqttc.on_log = on_log
 mqttc.username_pw_set("vzrkhrjc", "yycvU9313Rti")
 mqttc.connect('m10.cloudmqtt.com', 10676, 60)
 
+mqttc.loop_start()
+
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
@@ -107,10 +109,5 @@ if __name__ == '__main__':
     arg_parser.add_argument('-d', '--debug', default=False, help='debug'
                             )
     options = arg_parser.parse_args()
-
-    rc = 0
-    while rc == 0:
-        rc = mqttc.loop()
-    print("rc: " + str(rc))
 
     app.run(debug=options.debug, port=options.port)
