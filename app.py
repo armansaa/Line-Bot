@@ -25,10 +25,10 @@ from linebot.exceptions import InvalidSignatureError
 
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-mqttc = mqtt.Client(client_id="line-bot")
+mqttc = mqtt.Client()
 
 # Define event callbacks
-def on_connect(mosq, obj, rc):
+def on_connect(self, mosq, obj, rc):
     print("rc: " + str(rc))
 
 def on_message(mosq, obj, msg):
