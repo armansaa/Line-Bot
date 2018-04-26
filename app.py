@@ -12,7 +12,7 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-from __future__ import unicode_literals
+
 
 import paho.mqtt.client as mqtt
 import time
@@ -85,7 +85,7 @@ def on_connect(
     flags,
     rc,
     ):
-    print 'Connected with result code ' + str(rc)
+    print('Connected with result code ' + str(rc))
 
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
@@ -96,11 +96,11 @@ def on_connect(
 # The callback for when a PUBLISH message is received from the server.
 
 def on_message(client, userdata, msg):
-    print msg.topic + ' ' + str(msg.payload)
+    print(msg.topic + ' ' + str(msg.payload))
 
 
 def on_publish(client, userdata, msg):
-    print 'msg: ' + str(msg)
+    print('msg: ' + str(msg))
 
 
 def on_subscribe(
@@ -109,7 +109,7 @@ def on_subscribe(
     mid,
     granted_qos,
     ):
-    print 'Subscribed: ' + str(mid) + ' ' + str(granted_qos)
+    print('Subscribed: ' + str(mid) + ' ' + str(granted_qos))
 
 
 if __name__ == '__main__':
