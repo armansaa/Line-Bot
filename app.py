@@ -98,7 +98,7 @@ def callback():
 
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=event.message.text))
-<<<<<<< HEAD
+#<<<<<<< HEAD
         client.publish('esp/test', event.message.text)
     return 'OK'
 
@@ -136,13 +136,10 @@ def on_subscribe(
     granted_qos,
     ):
     print(('Subscribed: ' + str(mid) + ' ' + str(granted_qos)))
-
-
-=======
-        mqttc.publish('esp/test', event.message.text)
+    mqttc.publish('esp/test', event.message.text)
     return 'OK'
 
->>>>>>> 44232652abb93c41480d38bc8ef20e3096ebc2ed
+#>>>>>>> 44232652abb93c41480d38bc8ef20e3096ebc2ed
 if __name__ == '__main__':
     arg_parser = ArgumentParser(usage='Usage: python ' + __file__
                                 + ' [--port <port>] [--help]')
