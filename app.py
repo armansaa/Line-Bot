@@ -99,7 +99,7 @@ def callback():
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=event.message.text))
 #<<<<<<< HEAD
-        client.publish('esp/test', event.message.text)
+        mqttc.publish('esp/test', event.message.text)
     return 'OK'
 
 
