@@ -74,7 +74,7 @@ def callback():
 
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=event.message.text))
-        client.publish('esp/test', event.message.text)
+        client.publish('TA', event.message.text)
     return 'OK'
 
 
@@ -86,7 +86,7 @@ def on_connect(
     flags,
     rc,
     ):
-    print(('Connected with result code ' + str(rc)))
+    print('Connected with result code ' + str(rc))
 
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
@@ -97,11 +97,11 @@ def on_connect(
 # The callback for when a PUBLISH message is received from the server.
 
 def on_message(client, userdata, msg):
-    print((msg.topic + ' ' + str(msg.payload)))
+    print(msg.topic + ' ' + str(msg.payload))
 
 
 def on_publish(client, userdata, msg):
-    print(('msg: ' + str(msg)))
+    print('msg: ' + str(msg))
 
 
 def on_subscribe(
@@ -110,7 +110,7 @@ def on_subscribe(
     mid,
     granted_qos,
     ):
-    print(('Subscribed: ' + str(mid) + ' ' + str(granted_qos)))
+    print('Subscribed: ' + str(mid) + ' ' + str(granted_qos))
 
 
 if __name__ == '__main__':
