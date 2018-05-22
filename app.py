@@ -12,8 +12,6 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-
-
 import paho.mqtt.client as mqtt
 import time
 import os
@@ -27,9 +25,36 @@ from linebot.exceptions import InvalidSignatureError
 
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-client = mqtt.Client()
+mqttc = mqtt.Client()
 
-global options
+# Define event callbacks
+def on_connect(self, mosq, obj, rc):
+    print("rc: " + str(rc))
+
+def on_message(mosq, obj, msg):
+    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+
+def on_publish(mosq, obj, mid):
+    print("mid: " + str(mid))
+
+def on_subscribe(mosq, obj, mid, granted_qos):
+    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+
+def on_log(mosq, obj, level, string):
+    print(string)
+
+mqttc.on_message = on_message
+mqttc.on_connect = on_connect
+mqttc.on_publish = on_publish
+mqttc.on_subscribe = on_subscribe
+
+# Uncomment to enable debug messages
+mqttc.on_log = on_log
+
+mqttc.username_pw_set("vzrkhrjc", "yycvU9313Rti")
+mqttc.connect('m10.cloudmqtt.com', 10676, 60)
+
+mqttc.loop_start()
 
 app = Flask(__name__)
 
@@ -46,7 +71,6 @@ if channel_access_token is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
-
 
 @app.route('/callback', methods=['POST'])
 def callback():
@@ -74,6 +98,7 @@ def callback():
 
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=event.message.text))
+<<<<<<< HEAD
         client.publish('esp/test', event.message.text)
     return 'OK'
 
@@ -113,6 +138,11 @@ def on_subscribe(
     print(('Subscribed: ' + str(mid) + ' ' + str(granted_qos)))
 
 
+=======
+        mqttc.publish('TA', event.message.text)
+    return 'OK'
+
+>>>>>>> 44232652abb93c41480d38bc8ef20e3096ebc2ed
 if __name__ == '__main__':
     arg_parser = ArgumentParser(usage='Usage: python ' + __file__
                                 + ' [--port <port>] [--help]')
@@ -122,15 +152,4 @@ if __name__ == '__main__':
                             )
     options = arg_parser.parse_args()
 
-    client.on_connect = on_connect
-    client.on_message = on_message
-    client.on_publish = on_publish
-    client.on_subscribe = on_subscribe
-    client.username_pw_set('vzrkhrjc'
-                           ,
-                           'yycvU9313Rti'
-                           )
-
-    client.connect('m10.cloudmqtt.com', 10676, 60)
-
-    client.loop_forever()
+    app.run(debug=options.debug, port=options.port)
