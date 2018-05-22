@@ -139,7 +139,7 @@ def on_subscribe(
 
 
 =======
-        mqttc.publish('esp/tst', event.message.text)
+        mqttc.publish('esp/test', event.message.text)
     return 'OK'
 
 >>>>>>> 44232652abb93c41480d38bc8ef20e3096ebc2ed
